@@ -3,7 +3,7 @@
     <v-textarea
       label="Label"
       auto-grow
-      variant="outlined"
+      variant="contained"
       v-model="form.text"
     ></v-textarea>
     <v-btn @click="create_post()"> Enviar </v-btn>

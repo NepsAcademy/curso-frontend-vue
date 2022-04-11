@@ -3,12 +3,12 @@
     <v-text-field
       v-model="form.username"
       label="Username"
-      variant="outlined"
+      variant="contained"
     ></v-text-field>
     <v-text-field
       v-model="form.password"
       label="Password"
-      variant="outlined"
+      variant="contained"
     ></v-text-field>
     <v-btn @click="login()">Entrar</v-btn>
   </div>
