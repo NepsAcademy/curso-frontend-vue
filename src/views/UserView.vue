@@ -9,6 +9,7 @@
       v-model="form.password"
       label="Password"
       variant="contained"
+      type="password"
     ></v-text-field>
     <v-btn @click="login()">Entrar</v-btn>
   </div>
