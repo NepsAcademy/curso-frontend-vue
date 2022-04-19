@@ -1,7 +1,7 @@
 <template>
   <div class="create-post">
     <v-textarea
-      label="Label"
+      label="Texto"
       auto-grow
       variant="contained"
       v-model="form.text"
