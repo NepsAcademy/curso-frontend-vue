@@ -47,4 +47,11 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.post-card {
+  .author,
+  .text {
+    font-size: 1.1rem;
+  }
+}
+</style>
