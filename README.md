@@ -1,5 +1,24 @@
-# Desenvolvimento Web: Frontend
+# minifeed
 
-Esse projeto é parte do curso [Desenvolvimento Web: Frontend](https://neps.academy/br/course/desenvolvimento-web:-frontend) no [Neps Academy](https://neps.academy/br).
+## Project setup
+```
+npm install
+```
 
-Para aprender todos os detalhes sobre a implementação desse projeto nós recomendamos participar do curso.
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).

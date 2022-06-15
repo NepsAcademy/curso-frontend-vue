@@ -1,32 +1,21 @@
 <template>
-  <v-card class="mb-4 post-card">
-    <v-card-text>
-      <p class="author">
-        <span v-if="author"
-          ><b>{{ author.username }}</b></span
-        >
-        <span v-else
-          ><b>Usuário {{ author_id }}</b></span
-        >
-        escreveu
-      </p>
-      <p class="text">{{ text }}</p>
-      <p class="time">{{ formatted_time }}</p>
-    </v-card-text>
-  </v-card>
+  <div class="post-card">
+    <p class="author">
+      <span
+        ><b>{{ author.username }}</b></span
+      >
+      escreveu
+    </p>
+    <p class="text">{{ text }}</p>
+    <p class="time">{{ created }}</p>
+  </div>
 </template>
 
 <script>
-import moment from "moment";
-
 export default {
   props: {
     author: {
       type: Object,
-      default: null,
-    },
-    author_id: {
-      type: Number,
       default: null,
       required: true,
     },
@@ -39,19 +28,20 @@ export default {
       required: true,
     },
   },
-  computed: {
-    formatted_time() {
-      return moment.utc(this.created).local().format("DD/MM/YYYY HH:mm");
-    },
-  },
 };
 </script>
 
 <style lang="scss" scoped>
 .post-card {
-  .author,
-  .text {
-    font-size: 1.1rem;
-  }
+  border: 1px solid #ccc;
+  width: 800px;
+  border-radius: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 24px;
+
+  padding: 12px;
+
+  text-align: left;
 }
 </style>
