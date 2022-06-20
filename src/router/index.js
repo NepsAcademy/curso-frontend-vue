@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import FeedView from "../views/FeedView.vue";
 import CreatePostView from "../views/CreatePostView.vue";
-import UserView from "../views/UserView.vue";
+import LoginView from "../views/LoginView.vue";
 
 const routes = [
   {
@@ -15,9 +15,9 @@ const routes = [
     component: CreatePostView,
   },
   {
-    path: "/user",
-    name: "user",
-    component: UserView,
+    path: "/login",
+    name: "login",
+    component: LoginView,
   },
 ];
 

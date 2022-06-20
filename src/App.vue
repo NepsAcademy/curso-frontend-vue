@@ -1,8 +1,8 @@
 <template>
   <nav>
     <router-link to="/">Feed</router-link> |
-    <router-link to="/create">Criar Postagem</router-link> |
-    <router-link to="/user">Usuário</router-link>
+    <router-link to="/create">Create Post</router-link> |
+    <router-link to="/login">Login</router-link>
   </nav>
   <router-view />
 </template>
