@@ -15,8 +15,8 @@
       <p><b>ID:</b> {{ user.id }}</p>
       <p><b>Username:</b> {{ user.username }}</p>
       <p><b>Email:</b> {{ user.email }}</p>
-      <p><b>Created at:</b> {{ user.created_at }}</p>
-      <p><b>Birthdate:</b> {{ user.birthdate }}</p>
+      <p><b>Created at:</b> {{ created_at_formatted }}</p>
+      <p><b>Birthdate:</b> {{ birthdate_formatted }}</p>
       <p><b>Role:</b> {{ user.role.name }}</p>
 
       <button class="logout-button" @click="logout()">Logout</button>
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import { DateTime } from "luxon";
 export default {
   data() {
     return {
@@ -40,7 +41,6 @@ export default {
   },
   methods: {
     login() {
-      // console.log(this.$user);
       this.$axios
         .post("/auth/login", {
           username: this.username,
@@ -49,9 +49,11 @@ export default {
         .then((response) => {
           this.$axios.storeToken(response.data.access_token);
           this.fetchUser();
+          this.$toast.success("Login successful!", { position: "bottom" });
         })
         .catch((response) => {
           console.error(response.message);
+          this.$toast.error("Invalid credentials!", { position: "bottom" });
         });
     },
     fetchUser() {
@@ -67,47 +69,21 @@ export default {
     logout() {
       this.user = null;
       localStorage.removeItem("authToken");
+      this.$axios.updateToken();
+      this.$toast.info("Logout!", { position: "bottom" });
+    },
+  },
+  computed: {
+    created_at_formatted() {
+      return DateTime.fromISO(this.user.created_at).toFormat(
+        "dd/MM/yyyy HH:mm"
+      );
+    },
+    birthdate_formatted() {
+      return DateTime.fromISO(this.user.birthdate).toFormat("dd/MM/yyyy");
     },
   },
 };
 </script>
 
-<style lang="scss" scoped>
-input {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 15px;
-  height: 25px;
-  width: 300px;
-  border-radius: 4px;
-  border-width: 1px;
-  padding: 10px;
-}
-
-input::placeholder {
-  font-size: 1rem;
-}
-
-button {
-  background: #42b983;
-  color: #fff;
-  border: none;
-  padding: 10px;
-  width: 325px;
-  font-size: 1rem;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.logout-button {
-  background: #f44;
-}
-
-.user-info {
-  text-align: left;
-  max-width: 350px;
-  margin-left: auto;
-  margin-right: auto;
-}
-</style>
+<style lang="scss" scoped></style>

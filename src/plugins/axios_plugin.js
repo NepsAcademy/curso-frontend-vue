@@ -6,17 +6,24 @@ export default {
       baseURL: "http://localhost:5000",
     });
 
-    if (localStorage.getItem("authToken") != null) {
-      instance.defaults.headers.common[
-        "Authorization"
-      ] = `Bearer ${localStorage.getItem("authToken")}`;
-    }
-
     // Methods
+    instance.updateToken = () => {
+      if (localStorage.getItem("authToken") != null) {
+        instance.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${localStorage.getItem("authToken")}`;
+      } else {
+        instance.defaults.headers.common["Authorization"] = null;
+      }
+    };
+
     instance.storeToken = (token) => {
       localStorage.setItem("authToken", token);
-      instance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      instance.updateToken();
     };
+
+    // Setup
+    instance.updateToken();
 
     vue.config.globalProperties.$axios = instance;
   },

@@ -33,15 +33,19 @@ export default {
 
 <style lang="scss" scoped>
 .post-card {
-  border: 1px solid #ccc;
-  width: 800px;
-  border-radius: 8px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 24px;
+  background: #f4f5f6;
+  width: 100%;
 
+  border-radius: 8px;
+  margin-top: 24px;
   padding: 12px;
 
-  text-align: left;
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.11);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.11);
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.11);
+
+  p {
+    color: black;
+  }
 }
 </style>

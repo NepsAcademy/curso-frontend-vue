@@ -20,45 +20,19 @@ export default {
     createPost() {
       this.$axios
         .post("/posts/", { text: this.text })
-        .then((response) => {
-          console.log(response.data);
+        .then(() => {
           this.text = "";
+          this.$toast.success("Post created!", { position: "bottom" });
         })
         .catch((error) => {
           console.error(error.message);
+          this.$toast.info("First you need to login!", {
+            position: "bottom",
+          });
         });
     },
   },
 };
 </script>
 
-<style lang="scss" scoped>
-textarea {
-  display: block;
-  width: 100%;
-  min-width: 300px;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 25px;
-  border-radius: 8px;
-  padding: 10px;
-
-  font-size: 1rem;
-}
-
-textarea::placeholder {
-  font-size: 1rem;
-}
-
-button {
-  background: #42b983;
-  color: #fff;
-  border: none;
-  padding: 10px;
-  width: 325px;
-  font-size: 1rem;
-  cursor: pointer;
-  border-radius: 4px;
-}
-</style>
+<style lang="scss" scoped></style>
