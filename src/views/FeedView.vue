@@ -9,43 +9,49 @@
       :id="post.id"
       :text="post.text"
     />
+    <PaginationRow v-model="page" :pages="pages" />
   </div>
 </template>
 
 <script>
 import PostCard from "@/components/PostCard.vue";
+import PaginationRow from "@/components/PaginationRow.vue";
 export default {
   components: {
     PostCard,
+    PaginationRow,
   },
   data() {
     return {
-      posts: [
-        {
-          author: {
-            id: 1,
-            username: "tiagobpires",
-          },
-          created: "2022-06-05T20:53:48.886111",
-          id: 1,
-          text: "Hello guys, first post here!",
-        },
-        {
-          author: {
-            id: 1,
-            username: "tiagobpires",
-          },
-          created: "2022-06-05T20:53:48.890641",
-          id: 2,
-          text: "Neps is an awesome plataform :)",
-        },
-      ],
+      posts: [],
+      page: 1,
+      pages: 1,
     };
   },
   mounted() {
-    this.$axios.get("/posts/").then((response) => {
-      console.log(response.data);
-    });
+    this.fetchPosts();
+  },
+  methods: {
+    fetchPosts() {
+      this.$axios
+        .get("/posts/", {
+          params: {
+            page: this.page,
+            reversed: true,
+          },
+        })
+        .then((response) => {
+          this.posts = response.data.posts;
+          this.page = response.data.page;
+          this.pages = response.data.pages;
+        })
+        .catch((error) => console.error(error.message));
+    },
+  },
+  watch: {
+    page() {
+      this.fetchPosts();
+    },
   },
 };
 </script>
