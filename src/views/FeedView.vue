@@ -5,7 +5,7 @@
       v-for="post in posts"
       :key="post.id"
       :author="post.author"
-      :created="post.created"
+      :created="formatDate(post.created)"
       :id="post.id"
       :text="post.text"
     />
@@ -16,6 +16,7 @@
 <script>
 import PostCard from "@/components/PostCard.vue";
 import PaginationRow from "@/components/PaginationRow.vue";
+import { DateTime } from "luxon";
 export default {
   components: {
     PostCard,
@@ -46,6 +47,9 @@ export default {
           this.pages = response.data.pages;
         })
         .catch((error) => console.error(error.message));
+    },
+    formatDate(date) {
+      return DateTime.fromISO(date).toFormat("dd/MM/yyyy HH:mm");
     },
   },
   watch: {

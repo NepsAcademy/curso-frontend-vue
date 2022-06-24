@@ -10,10 +10,8 @@
     </form>
   </div>
   <div v-else>
-    <h1>User</h1>
+    <h1>{{ user.username }} (ID {{ user.id }})</h1>
     <div class="user-info">
-      <p><b>ID:</b> {{ user.id }}</p>
-      <p><b>Username:</b> {{ user.username }}</p>
       <p><b>Email:</b> {{ user.email }}</p>
       <p><b>Created at:</b> {{ created_at_formatted }}</p>
       <p><b>Birthdate:</b> {{ birthdate_formatted }}</p>
