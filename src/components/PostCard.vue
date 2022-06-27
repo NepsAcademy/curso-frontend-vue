@@ -48,6 +48,10 @@ export default {
     color: black;
   }
 
+  .text {
+    font-size: 1.1rem;
+  }
+
   .time {
     color: #aaa;
   }
