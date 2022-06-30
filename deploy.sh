@@ -16,7 +16,7 @@ git commit -m 'deploy'
 
 git branch -M gh-pages
 
-git remote add origin https://github.com/<USERNAME>/<REPO>.git
+git remote add origin https://github.com/NepsAcadmy/curso-frontend-vue.git
 
 git push -u -f origin gh-pages
 
