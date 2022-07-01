@@ -1,13 +1,42 @@
 <template>
-  <div v-if="user == null">
+  <div v-if="user == null && register == false">
     <h1>Login</h1>
 
-    <form @submit.prevent="login">
-      <input type="text" placeholder="Usuário" v-model="username" />
-      <input type="password" placeholder="Senha" v-model="password" />
+    <form @submit.prevent="loginUser">
+      <input type="text" placeholder="Username" v-model="username" />
+      <input type="password" placeholder="Password" v-model="password" />
 
       <button type="submit">Enter</button>
     </form>
+    <p>
+      Don't have an account yet?
+      <a @click="register = true" class="register-link">
+        <b> Register here! </b></a
+      >
+    </p>
+  </div>
+  <div v-else-if="user == null && register == true">
+    <h1>Register</h1>
+
+    <form @submit.prevent="registerUser">
+      <input type="text" placeholder="Username" v-model="username" />
+      <input type="text" placeholder="Email" v-model="email" />
+      <input type="date" placeholder="Birthdate" v-model="birthdate" />
+      <input type="password" placeholder="Password" v-model="password" />
+      <input
+        type="password"
+        placeholder="Confirm Password"
+        v-model="confirm_password"
+      />
+
+      <button type="submit">Register</button>
+    </form>
+    <p>
+      Already have an account?
+      <a @click="register = false" class="register-link">
+        <b> Login here! </b></a
+      >
+    </p>
   </div>
   <div v-else>
     <h1>{{ user.username }} (ID {{ user.id }})</h1>
@@ -29,16 +58,29 @@ export default {
     return {
       username: "",
       password: "",
+      birthdate: null,
+      email: "",
+      confirm_password: "",
       user: null,
+      register: false,
     };
   },
   mounted() {
     if (localStorage.getItem("authToken")) {
       this.fetchUser();
     }
+
+    // // Handle timezone problem
+    // let dateNow = new Date();
+    // console.log(dateNow);
+    // console.log(dateNow.toISOString());
+    // const offset = dateNow.getTimezoneOffset();
+    // dateNow = new Date(dateNow.getTime() - offset * 60 * 1000);
+    // console.log(dateNow.toISOString());
+    // this.birthdate = dateNow.toISOString().split("T")[0];
   },
   methods: {
-    login() {
+    loginUser() {
       this.$axios
         .post("/auth/login", {
           username: this.username,
@@ -52,6 +94,52 @@ export default {
         .catch((response) => {
           console.error(response.message);
           this.$toast.error("Invalid credentials!", { position: "bottom" });
+        });
+    },
+    registerUser() {
+      if (
+        this.username.length == 0 ||
+        this.password.length == 0 ||
+        this.email.length == 0 ||
+        this.birthdate == null
+      ) {
+        this.$toast.error("Missing information!", { position: "bottom" });
+        return;
+      }
+
+      // Handle timezone
+      let birthdate = new Date(this.birthdate);
+      const offset = birthdate.getTimezoneOffset();
+      birthdate = new Date(birthdate.getTime() - offset * 60 * 1000);
+      birthdate = birthdate.toISOString();
+
+      if (this.username.includes(" ")) {
+        this.$toast.error("Username can't have spaces!", {
+          position: "bottom",
+        });
+        return;
+      }
+
+      if (this.password != this.confirm_password) {
+        this.$toast.error("Passwords need to match!", { position: "bottom" });
+        return;
+      }
+
+      this.$axios
+        .post("/users/", {
+          username: this.username,
+          password: this.password,
+          email: this.email,
+          birthdate: birthdate,
+        })
+        .then(() => {
+          this.loginUser();
+        })
+        .catch((response) => {
+          console.error(response.message);
+          this.$toast.error("Error during user creation!", {
+            position: "bottom",
+          });
         });
     },
     fetchUser() {
@@ -84,4 +172,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.register-link:hover {
+  cursor: pointer;
+}
+</style>
