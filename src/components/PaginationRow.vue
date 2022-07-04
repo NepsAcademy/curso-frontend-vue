@@ -49,6 +49,8 @@ export default {
   font-size: 1.5rem;
   cursor: pointer;
   border-radius: 4px;
+
+  color: #999999;
 }
 
 .pagination-item-active {
