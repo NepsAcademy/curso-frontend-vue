@@ -6,13 +6,19 @@
       >
       wrote
     </p>
-    <p class="text">{{ text }}</p>
+    <!-- <p class="text">{{ text }}</p> -->
+    <Markdown class="text" :source="text" />
     <p class="time">{{ created }}</p>
   </div>
 </template>
 
 <script>
+import Markdown from "vue3-markdown-it";
+import "highlight.js/styles/monokai.css";
 export default {
+  components: {
+    Markdown,
+  },
   props: {
     author: {
       type: Object,
@@ -44,9 +50,9 @@ export default {
   -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.11);
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.11);
 
-  p {
-    color: black;
-  }
+  // p {
+  //   color: black;
+  // }
 
   .text {
     font-size: 1.1rem;
@@ -54,6 +60,19 @@ export default {
 
   .time {
     color: #aaa;
+  }
+}
+</style>
+
+<style lang="scss">
+.post-card {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  p {
+    color: black !important;
   }
 }
 </style>
