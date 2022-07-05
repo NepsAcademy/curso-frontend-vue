@@ -37,6 +37,19 @@ export default {
 };
 </script>
 
+<style lang="scss">
+.post-card {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  p {
+    color: black !important;
+  }
+}
+</style>
+
 <style lang="scss" scoped>
 .post-card {
   background: #f4f5f6;
@@ -50,29 +63,17 @@ export default {
   -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.11);
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.11);
 
-  // p {
-  //   color: black;
-  // }
+  // Fix based on https://stackoverflow.com/questions/271067/how-can-i-make-a-textarea-100-width-without-overflowing-when-padding-is-present
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 
   .text {
     font-size: 1.1rem;
   }
 
   .time {
-    color: #aaa;
-  }
-}
-</style>
-
-<style lang="scss">
-.post-card {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  p {
-    color: black !important;
+    color: #aaa !important;
   }
 }
 </style>
