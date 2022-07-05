@@ -2,7 +2,7 @@
 
 Esse projeto é parte do curso [Desenvolvimento Web: Frontend](https://neps.academy/br/course/desenvolvimento-web:-frontend) na [Neps Academy](https://neps.academy/br).
 
-Para aprender todos os detalhes sobre a implementação desse projeto nós recomendamos participar do curso.
+Para aprender todos os detalhes sobre a implementação desse projeto, nós recomendamos participar do curso.
 
 ### MiniFeed
 
@@ -16,13 +16,13 @@ Algumas funcionalidades incluem:
 - Login e Logout de usuários;
 - Criação de novas postagens;
 - Listar informações do usuário logado;
-- Suport a Markdown nas postagens;
+- Suporte a Markdown nas postagens;
 - Responsividade em dispositivos móveis;
 - e mais ;)
 
 ### Setup
 
-Para realizar o setup do projeto no seu computador computador você precisará ter o [Node e o NPM](https://nodejs.org/en/download/) instalados.
+Para realizar o setup do projeto no seu computador, você precisará ter o [Node e o NPM](https://nodejs.org/en/download/) instalados.
 
 Para instalar as dependências do projeto execute execute:
 
