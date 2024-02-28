@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
   install(vue) {
     const instance = axios.create({
-      baseURL: "https://guide-flask.herokuapp.com",
+      baseURL: "http://minifeed.neps.academy",
     });
 
     // Methods
