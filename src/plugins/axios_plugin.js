@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
   install(vue) {
     const instance = axios.create({
-      baseURL: "http://minifeed.neps.academy",
+      baseURL: "https://minifeed.neps.academy",
     });
 
     // Methods
