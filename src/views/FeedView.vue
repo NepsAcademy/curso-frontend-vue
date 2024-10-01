@@ -13,51 +13,39 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted, watch } from "vue";
+import { DateTime } from "luxon";
 import PostCard from "@/components/PostCard.vue";
 import PaginationRow from "@/components/PaginationRow.vue";
-import { DateTime } from "luxon";
-export default {
-  components: {
-    PostCard,
-    PaginationRow,
-  },
-  data() {
-    return {
-      posts: [],
-      page: 1,
-      pages: 1,
-    };
-  },
-  mounted() {
-    this.fetchPosts();
-  },
-  methods: {
-    fetchPosts() {
-      this.$axios
-        .get("/posts/", {
-          params: {
-            page: this.page,
-            reversed: true,
-          },
-        })
-        .then((response) => {
-          this.posts = response.data.posts;
-          this.page = response.data.page;
-          this.pages = response.data.pages;
-        })
-        .catch((error) => console.error(error.message));
-    },
-    formatDate(date) {
-      return DateTime.fromISO(date).toFormat("dd/MM/yyyy HH:mm");
-    },
-  },
-  watch: {
-    page() {
-      this.fetchPosts();
-    },
-  },
+import { useAxios } from "@/composables/useAxios";
+
+const { get } = useAxios();
+
+const posts = ref([]);
+const page = ref(1);
+const pages = ref(1);
+
+const fetchPosts = async () => {
+  get("/posts/", {
+    params: {
+      page: page.value,
+      reversed: true
+    }
+  }).then((response) => {
+    posts.value = response.data.posts;
+    page.value = response.data.page;
+    pages.value = response.data.pages;
+  });
 };
+
+const formatDate = (date) => {
+  return DateTime.fromISO(date).toFormat("dd/MM/yyyy HH:mm");
+};
+
+onMounted(fetchPosts);
+
+watch(page, fetchPosts);
 </script>
 
 <style lang="scss" scoped></style>

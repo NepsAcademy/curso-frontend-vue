@@ -6,55 +6,35 @@
       >
       wrote
     </p>
-    <!-- <p class="text">{{ text }}</p> -->
     <Markdown class="text" :source="text" />
     <p class="time">{{ created }}</p>
   </div>
 </template>
 
-<script>
+<script setup>
 import Markdown from "vue3-markdown-it";
 import "highlight.js/styles/monokai.css";
-export default {
-  components: {
-    Markdown,
-  },
-  props: {
-    author: {
-      type: Object,
-      default: null,
-      required: true,
-    },
-    created: {
-      type: String,
-      required: true,
-    },
-    text: {
-      type: String,
-      required: true,
-    },
-  },
-};
-</script>
 
-<style lang="scss">
-.post-card {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  p {
-    color: black !important;
+defineProps({
+  author: {
+    type: Object,
+    required: true
+  },
+  created: {
+    type: String,
+    required: true
+  },
+  text: {
+    type: String,
+    required: true
   }
-}
-</style>
+});
+</script>
 
 <style lang="scss" scoped>
 .post-card {
-  background: #f4f5f6;
+  background: $background-secondary;
   width: 100%;
-
   border-radius: 8px;
   margin-top: 24px;
   padding: 12px;
@@ -68,12 +48,29 @@ export default {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 
+  p {
+    color: $text-primary;
+  }
+
   .text {
     font-size: 1.1rem;
   }
 
   .time {
-    color: #aaa !important;
+    color: $text-muted;
+  }
+}
+</style>
+
+<style lang="scss">
+.post-card {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  p {
+    color: $text-primary;
   }
 }
 </style>

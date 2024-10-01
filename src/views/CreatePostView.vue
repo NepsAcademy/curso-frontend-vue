@@ -9,29 +9,25 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      text: "",
-    };
-  },
-  methods: {
-    createPost() {
-      this.$axios
-        .post("/posts/", { text: this.text })
-        .then(() => {
-          this.text = "";
-          this.$toast.success("Post created!", { position: "bottom" });
-        })
-        .catch((error) => {
-          console.error(error.message);
-          this.$toast.info("First you need to login!", {
-            position: "bottom",
-          });
-        });
-    },
-  },
+<script setup>
+import { ref } from "vue";
+import { useAxios } from "@/composables/useAxios";
+import { useToast } from "vue-toast-notification";
+
+const { post } = useAxios();
+const $toast = useToast();
+
+const text = ref("");
+
+const createPost = () => {
+  post("/posts/", { text: text.value })
+    .then(() => {
+      text.value = "";
+      $toast.success("Post created!", { position: "bottom" });
+    })
+    .catch(() => {
+      $toast.info("First you need to login!", { position: "bottom" });
+    });
 };
 </script>
 

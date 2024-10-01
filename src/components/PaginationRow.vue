@@ -11,24 +11,23 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    modelValue: {
-      type: Number,
-      required: true,
-    },
-    pages: {
-      type: Number,
-      required: true,
-    },
+<script setup>
+defineProps({
+  modelValue: {
+    type: Number,
+    required: true
   },
-  methods: {
-    changePage(page) {
-      this.$emit("update:modelValue", page);
-    },
-  },
-};
+  pages: {
+    type: Number,
+    required: true
+  }
+});
+
+const emit = defineEmits(["update:modelValue"]);
+
+function changePage(page) {
+  emit("update:modelValue", page);
+}
 </script>
 
 <style lang="scss" scoped>
@@ -38,23 +37,16 @@ export default {
 }
 
 .pagination-item {
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
-
-  margin-left: 5px;
-  margin-right: 5px;
-
+  padding: 5px 10px;
+  margin: 0 5px 10px 5px;
   font-size: 1.5rem;
   cursor: pointer;
   border-radius: 4px;
-
-  color: #999999;
+  color: $pagination-item-color;
 }
 
 .pagination-item-active {
-  background-color: #ff2e34;
-  color: white;
+  background-color: $pagination-item-active-background;
+  color: $pagination-item-active-color;
 }
 </style>

@@ -1,24 +1,30 @@
-#!/usr/bin/env sh
+#!/bin/bash
 
-# abort on errors
+# Parar o script se ocorrer algum erro
 set -e
 
-# build
+# Build do projeto
 npm run build
 
-# navigate into the build output directory
+# Acessar o diretório de build
 cd dist
 
-# push
+# Inicializar um repositório Git (caso não exista)
 git init
+
+# Verificar se a branch gh-pages já existe localmente, e se não, criar a branch
+git checkout -B gh-pages
+
+# Adicionar todos os arquivos
 git add -A
-git commit -m 'deploy'
 
-git branch -M gh-pages
+# Fazer o commit com uma mensagem de deploy
+git commit -m "Deploy"
 
-git remote add origin https://github.com/NepsAcademy/course-frontend-vue.git
+# Forçar o push para a branch gh-pages do repositório remoto
+git push -f git@github.com:tiagobpires/neps_frontend_course.git gh-pages
 
-git push -u -f origin gh-pages
-
-# back to the parent folder
+# Voltar para o diretório anterior
 cd -
+
+echo "Deploy finalizado!"

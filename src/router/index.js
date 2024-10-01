@@ -7,23 +7,23 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: FeedView,
+    component: FeedView
   },
   {
     path: "/create",
     name: "create",
-    component: CreatePostView,
+    component: CreatePostView
   },
   {
     path: "/login",
     name: "login",
-    component: LoginView,
-  },
+    component: LoginView
+  }
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes,
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes
 });
 
 export default router;

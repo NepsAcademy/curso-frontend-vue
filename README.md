@@ -33,10 +33,10 @@ npm install
 Em seguida execute:
 
 ```bash
-npm run serve
+npm run dev
 ```
 
-O projeto estará acessível na URL `http://localhost:8080`.
+O projeto estará acessível na URL `http://localhost:5137`.
 
 ### Mudanças
 
